@@ -11,6 +11,4 @@ interface QuestionRepositoryContract
 
     public function next(Room $room): ?Question;
 
-    public function answer(Room $room, Player $player, string $answer): void;
-
 }

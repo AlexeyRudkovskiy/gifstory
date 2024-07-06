@@ -9,7 +9,7 @@ use App\Models\Room;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
-class PlayerTest extends TestCase
+class PlayerRepositoryTest extends TestCase
 {
     use RefreshDatabase;
 

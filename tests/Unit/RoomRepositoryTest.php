@@ -7,7 +7,7 @@ use Tests\TestCase;
 use App\Contracts\RoomRepositoryContract;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
-class RoomTest extends TestCase
+class RoomRepositoryTest extends TestCase
 {
     use RefreshDatabase;
 
