@@ -3,6 +3,7 @@
 namespace App\Contracts;
 
 use App\Exceptions\PlayerAlreadyExists;
+use App\Exceptions\PlayerNotExists;
 use App\Exceptions\RoomNotFound;
 use App\Models\Player;
 use App\Models\Room;
@@ -19,5 +20,12 @@ interface PlayerRepositoryContract
      * @throws PlayerAlreadyExists
      */
     public function join(Room $room, string $username): Player;
+
+    /**
+     * @param string $token
+     * @return Player|null
+     * @throws PlayerNotExists
+     */
+    public function findByToken(string $token): ?Player;
 
 }

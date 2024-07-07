@@ -5,6 +5,7 @@ namespace Tests\Unit;
 use App\Contracts\PlayerRepositoryContract;
 use App\Contracts\RoomRepositoryContract;
 use App\Exceptions\PlayerAlreadyExists;
+use App\Exceptions\PlayerNotExists;
 use App\Models\Room;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
@@ -65,6 +66,27 @@ class PlayerRepositoryTest extends TestCase
 
         // 3. Join second player
         $this->playerRepository->join($this->room, 'username');
+    }
+
+    public function test_it_should_find_player_by_token()
+    {
+        // 1. Join the room
+        $originalPlayer = $this->playerRepository->join($this->room, 'username');
+
+        // 2. Find player by token
+        $player = $this->playerRepository->findByToken($originalPlayer->token);
+
+        // 3. Assert player
+        $this->assertEquals($originalPlayer->token, $player->token);
+    }
+
+    public function test_it_should_throw_an_exception_when_token_not_exists()
+    {
+        // 1. Expect exception
+        $this->expectException(PlayerNotExists::class);
+
+        // 2. Try to find a player
+        $this->playerRepository->findByToken('invalid');
     }
 
 }

@@ -5,6 +5,7 @@ namespace App\Services;
 use App\Contracts\PlayerRepositoryContract;
 use App\Contracts\RoomRepositoryContract;
 use App\Exceptions\PlayerAlreadyExists;
+use App\Exceptions\PlayerNotExists;
 use App\Models\Player;
 use App\Models\Room;
 
@@ -28,5 +29,20 @@ class PlayerRepository implements PlayerRepositoryContract
 
         return $player;
     }
+
+    public function findByToken(string $token): ?Player
+    {
+        // 1. Find player by token
+        $player = Player::query()->whereToken($token)->first();
+
+        // 2. If player not found - throw an exception
+        if ($player === null) {
+            throw new PlayerNotExists();
+        }
+
+        // 3. Return player
+        return $player;
+    }
+
 
 }

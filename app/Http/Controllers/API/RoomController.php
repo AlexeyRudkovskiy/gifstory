@@ -36,7 +36,10 @@ class RoomController extends Controller
         $player = $this->playerRepository->join($room, $request->get('username'));
 
         // 2. Return response
-        return PlayerResource::make($player)->response()->setStatusCode(Response::HTTP_OK);
+        return PlayerResource::make($player)
+            ->additional([ 'token' => $player->token ])
+            ->response()
+            ->setStatusCode(Response::HTTP_OK);
     }
 
 }
