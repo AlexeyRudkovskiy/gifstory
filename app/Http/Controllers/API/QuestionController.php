@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\API;
 
 use App\Contracts\AnswerRepositoryContract;
+use App\Contracts\GameContract;
 use App\Contracts\QuestionRepositoryContract;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\QuestionResource;
@@ -16,7 +17,8 @@ class QuestionController extends Controller
 
     public function __construct(
         private readonly QuestionRepositoryContract $questionRepository,
-        private readonly AnswerRepositoryContract $answerRepository
+        private readonly AnswerRepositoryContract $answerRepository,
+        private readonly GameContract $gameContract
     )
     {
         /// Empty

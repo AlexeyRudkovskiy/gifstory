@@ -2,6 +2,7 @@
 
 namespace App\Http\Middleware;
 
+use App\Contracts\GameContract;
 use App\Contracts\PlayerRepositoryContract;
 use Closure;
 use Illuminate\Http\Request;
@@ -11,7 +12,10 @@ use Symfony\Component\HttpFoundation\Response;
 class AuthPlayer
 {
 
-    public function __construct(private readonly PlayerRepositoryContract $playerRepository)
+    public function __construct(
+        private readonly PlayerRepositoryContract $playerRepository,
+        private readonly GameContract $gameContract
+    )
     {
 
     }
@@ -25,7 +29,14 @@ class AuthPlayer
     {
         $header = $request->header('authorization');
         $token = Str::replaceStart('Bearer ', '', $header);
-        dd($token);
+        $player = $this->playerRepository->findByToken($token);
+
+        if ($player === null) {
+            abort(403);
+        }
+
+        $this->gameContract->setPlayer($player);
+
         return $next($request);
     }
 }
