@@ -4,6 +4,7 @@ use App\Http\Controllers\API\RoomController;
 use App\Http\Controllers\API\QuestionController;
 
 // Room endpoints
+Route::get('rooms', [RoomController::class, 'index'])->name('room.index');
 Route::put('room', [RoomController::class, 'create'])->name('room.store');
 Route::post('room/{room}', [RoomController::class, 'join'])->name('room.join');
 

@@ -13,6 +13,13 @@ interface RoomRepositoryContract
 {
 
     /**
+     * Return my rooms
+     *
+     * @return Collection<Room>
+     */
+    public function getMyRooms(): Collection;
+
+    /**
      * Create new room and return it
      *
      * @return Room

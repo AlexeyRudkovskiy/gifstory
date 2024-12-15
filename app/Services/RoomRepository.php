@@ -8,10 +8,19 @@ use App\Exceptions\RoomNotFound;
 use App\Models\Player;
 use App\Models\Question;
 use App\Models\Room;
+use App\Models\User;
 use Illuminate\Support\Collection;
 
 class RoomRepository implements RoomRepositoryContract
 {
+
+    public function getMyRooms(): Collection
+    {
+        /** @var User $user */
+        $user = auth()->user();
+
+        return $user->rooms;
+    }
 
     public function create(): Room
     {

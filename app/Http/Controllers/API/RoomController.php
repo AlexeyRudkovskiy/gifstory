@@ -9,6 +9,7 @@ use App\Http\Requests\JoinRoomRequest;
 use App\Http\Resources\PlayerResource;
 use App\Http\Resources\RoomResource;
 use App\Models\Room;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use \Illuminate\Http\JsonResponse;
@@ -22,6 +23,13 @@ class RoomController extends Controller
     )
     {
         /// Empty
+    }
+
+    public function index()
+    {
+        $rooms = $this->roomRepository->getMyRooms();
+
+        return RoomResource::collection($rooms);
     }
 
     public function create(): JsonResponse
