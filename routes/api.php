@@ -2,6 +2,11 @@
 
 use App\Http\Controllers\API\RoomController;
 use App\Http\Controllers\API\QuestionController;
+use Illuminate\Support\Facades\Route;
+
+Route::middleware('auth:sanctum')->group(function () {
+    Route::get('me', fn () => auth()->user())->name('api.me');
+});
 
 // Room endpoints
 Route::get('rooms', [RoomController::class, 'index'])->name('room.index');

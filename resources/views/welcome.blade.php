@@ -11,12 +11,10 @@
         <link href="https://fonts.bunny.net/css?family=figtree:400,600&display=swap" rel="stylesheet" />
 
         @vite('resources/css/app.css')
+        @php(auth()->loginUsingId(1))
     </head>
-    <body class="text-3xl font-bold underline">
-        <div id="app">
-            <div class="text-large">test</div>
-            <example-component></example-component>
-        </div>
+    <body>
+        <div id="app"></div>
 
         @vite('resources/js/app.js')
     </body>
